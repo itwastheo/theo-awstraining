@@ -1,5 +1,5 @@
 #!/bin/bash
-MY_SHELL="csh"
+MY_SHELL="koffi"
 
 if [ "$MY_SHELL" = "bash" ]
 then
