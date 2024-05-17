@@ -1,9 +1,9 @@
-#Using Docker Compose to install SonarQube is a streamlined way to set up and manage your SonarQube environment. Below are the steps to do this:
+**Using Docker Compose to install SonarQube is a streamlined way to set up and manage your SonarQube environment. Below are the steps to do this:**
 
-#Install Docker and Docker Compose:
+**Install Docker and Docker Compose:**
 Ensure you have Docker and Docker Compose installed on your machine. You can download and install them from Docker's official website.
 
-#Create a Docker Compose file:
+**Create a Docker Compose file:**
 Create a docker-compose.yml file in your working directory. This file will define the services for SonarQube and its database, PostgreSQL.
 
 In the `docker-compose.yml' configuration:
@@ -13,13 +13,13 @@ In the `docker-compose.yml' configuration:
 - Environment variables are set for the SonarQube database connection.
 - Volumes are used to persist SonarQube and PostgreSQL data.
 
-  Run Docker Compose:
+**  Run Docker Compose:**
 Open a terminal, navigate to the directory where your docker-compose.yml file is located, and run the following command to start the services:
 
 `docker-compose up -d`
 The -d flag runs the services in detached mode, meaning they will run in the background.
 
-Access SonarQube:
+**Access SonarQube:**
 Once the services are up and running, you can access SonarQube by opening a web browser and navigating to http://localhost:9000. The default login credentials are:
 
 `Username`: `admin`
