@@ -1,5 +1,8 @@
 **Using Docker Compose to install SonarQube is a streamlined way to set up and manage your SonarQube environment. Below are the steps to do this:**
 
+**Hardware requirements**
+A small-scale (individual or small team) instance of the SonarQube server requires at least 2GB of RAM to run efficiently and 1GB of free RAM for the OS. If you are installing an instance for a large team or an enterprise, please consider the additional recommendations below.
+
 **Install Docker and Docker Compose:**
 Ensure you have Docker and Docker Compose installed on your machine. You can download and install them from Docker's official website.
 
