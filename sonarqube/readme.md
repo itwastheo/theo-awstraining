@@ -13,7 +13,7 @@ In the `docker-compose.yml' configuration:
 - Environment variables are set for the SonarQube database connection.
 - Volumes are used to persist SonarQube and PostgreSQL data.
 
-**  Run Docker Compose:**
+**Run Docker Compose:**
 Open a terminal, navigate to the directory where your docker-compose.yml file is located, and run the following command to start the services:
 
 `docker-compose up -d`
@@ -25,7 +25,7 @@ Once the services are up and running, you can access SonarQube by opening a web 
 `Username`: `admin`
 `Password`: `admin`
 
-#Verify Setup:
+**Verify Setup:**
 You can verify that both SonarQube and PostgreSQL containers are running using the following command:
 
 `docker-compose ps`
