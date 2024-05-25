@@ -141,9 +141,9 @@ First, we have to get access to loki-stack:
 
 ```bash
 # make it accessible
-kubectl port-forward service/loki-stack-grafana 3000:80 &
+kubectl port-forward service/logging-grafana 3000:80 &
 # export its admin password
-GRAFANA=$(kubectl get secret loki-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
+GRAFANA=$(kubectl get secret logging-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
 # copy this password
 echo $GRAFANA
 ```
