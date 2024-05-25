@@ -137,7 +137,7 @@ Prometheus is installed with a Helm chart in this lab, and the chart supports an
 
 ## View logs
 
-First, we have to get access to loki-stack:
+First, we have to get access to logging-grafana stack:
 
 ```bash
 # make it accessible
@@ -148,7 +148,7 @@ GRAFANA=$(kubectl get secret logging-grafana -o jsonpath="{.data.admin-password}
 echo $GRAFANA
 ```
 
-Then, you can [view logs for the Python app here](http://localhost:3000/explore?orgId=1&left=%5B%22now-5m%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bapp%3D%5C%22python-with-prometheus%5C%22%7D%22%7D%5D), after logging in of course.
+Then, you can [view logs for the Python app here](http://localhost:3000/explore?orgId=1&left=%5B%22now-5m%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bapp%3D%5C%22python-with-prometheus%5C%22%7D%22%7D%5D), after logging in using this URL http://localhost:3000/.
 
 
 **Check Metrics Endpoint:** Ensure your application exposes metrics correctly at the specified endpoint. You can access it directly to verify. 
