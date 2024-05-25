@@ -147,7 +147,7 @@ Port-forward the Grafana service to access the Grafana UI:
 kubectl --namespace default port-forward $POD_NAME 3000
 ```
 
-**Step 6: Create a Dashboard in Grafana**
+**Create a Dashboard in Grafana**
     -   Access Grafana UI in your browser: http://localhost:3000
     -   Log in to Grafana using the default credentials (admin/admin).
 
@@ -166,3 +166,7 @@ kubectl --namespace default port-forward $POD_NAME 3000
     -   Choose "Graph" as the visualization.
     -   Customize the visualization as needed (e.g., add labels, set a title).
 
+**Delete the EKS Cluster**
+```
+eksctl delete cluster <cluster-name>
+```
