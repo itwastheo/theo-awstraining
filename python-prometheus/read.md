@@ -48,7 +48,7 @@ helm repo update
 helm upgrade --install metrics prometheus-community/prometheus
 ```
 
-# Install Loki-stack, this can be used to easily look at logs
+# Install Grafana, this can be used to review the metrics
 ```
 helm upgrade --install logging grafana/loki-stack \
   --namespace default --set promtail.enabled=true \
@@ -135,33 +135,19 @@ The text it actually ingests for this lab can be [viewed here, assuming you stil
 
 Prometheus is installed with a Helm chart in this lab, and the chart supports annotations. Essentially, Prometheus will watch for pods that have these annotations, configure itself to use them, and then ingest their metrics.
 
-## View logs
 
-First, we have to get access to logging-grafana stack:
-
-```bash
-# make it accessible
-kubectl port-forward service/logging-grafana 3000:80 &
-# export its admin password
-GRAFANA=$(kubectl get secret logging-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
-# copy this password
-echo $GRAFANA
+First, we have to get access to grafana stack:
 ```
-
-Then, you can [view logs for the Python app here](http://localhost:3000/explore?orgId=1&left=%5B%22now-5m%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bapp%3D%5C%22python-with-prometheus%5C%22%7D%22%7D%5D), after logging in using this URL http://localhost:3000/.
-
-
-**Check Metrics Endpoint:** Ensure your application exposes metrics correctly at the specified endpoint. You can access it directly to verify. 
+  kubectl get secret -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=grafana" -o jsonpath="{.items[0].metadata.name}")
+  kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-kubectl port-forward svc/python-app 8080:80
+Port-forward the Grafana service to access the Grafana UI:
 ```
-Open your browser and go to http://localhost:8080/metrics.
+kubectl --namespace default port-forward $POD_NAME 3000
+```
 
 **Step 6: Create a Dashboard in Grafana**
-    -   Port-forward the Grafana service to access the Grafana UI:
-    ```
-    kubectl port-forward svc/grafana 3000:80
-    ```
     -   Access Grafana UI in your browser: http://localhost:3000
     -   Log in to Grafana using the default credentials (admin/admin).
 
@@ -170,10 +156,13 @@ Open your browser and go to http://localhost:8080/metrics.
     -   Select "Data Sources" and click on "Add data source".
     -   Choose "Prometheus" as the type.
     -   Enter the Prometheus service URL (e.g., http://prometheus-server:80) and save the data source.
+    -   Run the below command and copy the endpoints to retrieve the Prometheus Service URL
+        ```
+        kubectl describe svc metrics-prometheus-server
+        ```
 **Create a new dashboard:**
 
     -   Click on the "+" icon in the side menu and select "Dashboard" -> "Add new panel".
     -   Choose "Graph" as the visualization.
-    -   In the "Query" section, enter a Prometheus query to visualize a metric from -   your Python application (e.g., python_requests_total).
     -   Customize the visualization as needed (e.g., add labels, set a title).
 
