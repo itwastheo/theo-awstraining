@@ -36,10 +36,12 @@ $ eksctl get addon --name aws-ebs-csi-driver --cluster dev
 ```
 
 # Setup helm repos to get software for your Kubernetes cluster
+```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
+```
 
 # Install Prometheus, later it'll scrape metrics from the Python app's pods
 helm upgrade --install metrics prometheus-community/prometheus
