@@ -44,17 +44,23 @@ helm repo update
 ```
 
 # Install Prometheus, later it'll scrape metrics from the Python app's pods
+```
 helm upgrade --install metrics prometheus-community/prometheus
+```
 
 # Install Loki-stack, this can be used to easily look at logs
+```
 helm upgrade --install logging grafana/loki-stack \
   --namespace default --set promtail.enabled=true \
-  --set grafana.enabled=true 
+  --set grafana.enabled=true
+```
 
 **Get your Grafana password**
 Get your 'admin' user password by running:
-
+```
    kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+
 **Build and Push Docker Image**
 ```
 docker build -t my-python-app .
