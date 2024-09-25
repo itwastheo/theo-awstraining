@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-with-prometheus
+  labels:
+    app: python-with-prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-with-prometheus
+  template:
+    metadata:
+      labels:
+        app: python-with-prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "5000"
+    spec:
+      containers:
+        - name: python-with-prometheus
+          imagePullPolicy: Always
+          # Point this at your Docker Repo
+          image: kylos101/python-with-prometheus:1.0.0
+          ports:
+            - containerPort: 5000
+          # Necessary to see stderr output
+          env:
+          - name: PYTHONUNBUFFERED
+            value: "1"

@@ -18,7 +18,7 @@ data "aws_availability_zones" "available" {
 
 
 resource "random_shuffle" "az_list" {
-  input        = data.aws_availability_zones.available.names
+  input        = var.availability_zones
   result_count = 2
 }
 

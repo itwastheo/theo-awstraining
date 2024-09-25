@@ -11,7 +11,7 @@ module "eks" {
   scaling_max_size        = 1
   scaling_min_size        = 1
   instance_types          = ["t3.small"]
-  key_pair                = "Ohio"
+  key_pair                = "my-first-server"
 }
 
 module "vpc" {
@@ -24,6 +24,7 @@ module "vpc" {
   public_cidrs            = ["10.0.1.0/24", "10.0.2.0/24"]
   map_public_ip_on_launch = true
   rt_route_cidr_block     = "0.0.0.0/0"
+  availability_zones      = ["us-east-1a", "us-east-1b"]
 
 }
 
